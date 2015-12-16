@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="viewport" content="width=device-width"/>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+
+<style type="text/css">
+body,html {background:#fff;font-family:"Bitstream Vera Sans","Lucida Grande","Lucida Sans Unicode",Lucidux,Verdana,Lucida,sans-serif;}tr:nth-child(even) {background:#f4f4f4;}th,td {padding:0.1em 0.5em;}th {text-align:left;font-weight:bold;background:#eee;border-bottom:1px solid #aaa;}#list {border:1px solid #aaa;width:100%;}a {color:#a33;}a:hover {color:#e33;}
+</style>
+
+<title>文件列表</title>
+</head><body><h1>Index of /</h1>
+<table id="list" cellpadding="0.1em" cellspacing="0">
+<colgroup><col width="55%"/><col width="20%"/><col width="25%"/></colgroup>
+<thead><tr><th>文件名</th><th>文件大小</th><th>创建时间</th></tr></thead>
+<tbody>
+</tbody>
+</table>
+
+<div id="footer">
+<div id="copyright">
+<script type="text/javascript">
+	TimeObj= new Date();
+    // Ajax Code
+	var	api="http://localhost"
+	$(document).ready(function(){
+		$.get(api+'/dirs',function(data){
+			var obj = eval('(' + data + ')');
+			for (var i=0;i<obj.infos.length;i++){
+			if (typeof obj.infos[i].filesize === 'undefined'){
+				obj.infos[i].filesize = "目录"
+			}
+			else
+			{
+				obj.infos[i].filesize = obj.infos[i].filesize/1024 +"KB"; 
+			}
+			if (typeof obj.infos[i].access_url === 'undefined'){
+			var html ='';
+			html += "<tr><td><a href='#' onclick=load('"+obj.infos[i].name+"')>"+obj.infos[i].name+"</a></td><td>"+obj.infos[i].filesize+"</td><td>"+TimeObj.toDateString(obj.infos[i].mtime);+"</td></tr>";
+			}
+			else
+			{
+			var html ='';
+			html += "<tr><td><a href="+obj.infos[i].access_url+" >"+obj.infos[i].name+"</a></td><td>"+obj.infos[i].filesize+"</td><td>"+TimeObj.toDateString(obj.infos[i].mtime);+"</td></tr>";
+			}
+			$("#list").append(html);
+			}
+		}
+		)
+	});
+	function load(a){
+		$("tbody").empty();
+		$.get(api+'/dir/'+a,function(data){
+			var obj = eval('(' + data + ')');
+			for (var i=0;i<obj.infos.length;i++){
+			if (typeof obj.infos[i].filesize === 'undefined'){
+				obj.infos[i].filesize = "目录"
+			}
+			else
+			{
+				obj.infos[i].filesize = obj.infos[i].filesize/1024 +"KB"; 
+			}
+			if (typeof obj.infos[i].access_url === 'undefined'){
+			var html ='';
+			html += "<tr><td><a href='#' onclick=load('"+obj.infos[i].name+"')>"+obj.infos[i].name+"</a></td><td>"+obj.infos[i].filesize+"</td><td>"+TimeObj.toDateString(obj.infos[i].mtime);+"</td></tr>";
+			}
+			else
+			{
+			var html ='';
+			html += "<tr><td><a href="+obj.infos[i].access_url+" >"+obj.infos[i].name+"</a></td><td>"+obj.infos[i].filesize+"</td><td>"+TimeObj.toDateString(obj.infos[i].mtime);+"</td></tr>";
+			}
+			$("#list").append(html);
+			}
+		}
+		)
+	}
+</script>
+版权所有 &copy; 2015 <a href="http://www.ixiqin.com" target="_blank">西秦公子</a> </div>
+</div>
