@@ -8,7 +8,8 @@ spl_autoload_register(function($class){
 });
 
 //请到http://console.qcloud.com/cos去获取你的appid、sid、skey
-define('COSAPPID', 'ID');
-define('COSSECRETID','SID');
-define('COSSECRETKEY','SK');
-define('BUCKET','Bucket');
+//替换下方对应文字
+define('COSAPPID', '10008065');
+define('COSSECRETID','AKIDyQOi493U2ymtah7M8qsLfGQEipTLHJ1I');
+define('COSSECRETKEY','LalrU2rVJldDLi6WgDLnxVhDqi3bMoaZ');
+define('BUCKET','amhltt=');
