@@ -8,13 +8,16 @@
  - 支持多级目录访问
 
 
-## 食用方法
+## 使用用方法
 1. 将index.php config.inc.php Slim Qcloud_cos 以及.htaccess文件上传到一个支持PHP的空间（可以放在博客的二级目录里,不过要修改.htaccess）
 2. 修改config.inc.php为你自己的信息
 3. 将index.html中第26行的api改为你的index.php的文件目录，如"http://www.ixiqin.com/api",最后不加斜杠
 4. 访问index.html文件
  
-
+##关于伪静态
+对于Apache，我已经提供了.Htaccess文件了。可以直接使用。
+Nginx用户可以将你的API为如下的格式，无需伪静态即可正常工作！
+`var	api="http://demo.com/index.php"`
 
 ##联系方式
 QQ:894849635
